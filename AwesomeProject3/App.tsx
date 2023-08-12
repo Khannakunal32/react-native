@@ -7,12 +7,14 @@
 
 import React from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
 } from 'react-native';
+import CompanyData from './components/CompanyData';
 
 const style = StyleSheet.create({
   text: {
@@ -26,9 +28,8 @@ function Ex(): JSX.Element {
 }
 
 // 2nd way
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function EX2(): void {
-  console.log('xyz2');
+function EX2(val: any): void {
+  console.warn(val);
 }
 
 // 3rd way
@@ -37,7 +38,7 @@ const Ex3 = () => {
 };
 
 // 4th way
-function fruit() {
+function fruit(): String {
   return 'apple';
 }
 
@@ -46,11 +47,13 @@ function App(): JSX.Element {
     <SafeAreaView>
       <StatusBar />
       <ScrollView>
+        <CompanyData />
         {/* eslint-disable-next-line react-native/no-inline-styles */}
         <Text style={{fontSize: 30}}>Test is in control</Text>
         <Ex />
         <Text>{fruit()}</Text>
         <Text style={style.text}>Test is in control</Text>
+        <Button title="Click Me" onPress={() => EX2('hello')} />
       </ScrollView>
     </SafeAreaView>
   );
