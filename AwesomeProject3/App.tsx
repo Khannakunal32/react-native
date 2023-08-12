@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -15,6 +15,8 @@ import {
   Text,
 } from 'react-native';
 import CompanyData from './components/CompanyData';
+import Parent from './components/PassingProps';
+import StylingComponent from './components/Styling';
 
 const style = StyleSheet.create({
   text: {
@@ -43,17 +45,29 @@ function fruit(): String {
 }
 
 function App(): JSX.Element {
+  const [name, setName] = useState('kunal');
+
+  function stateHandler(): void {
+    if (name === 'kunal') {
+      setName('khanna');
+    } else {
+      setName('kunal');
+    }
+  }
+
   return (
     <SafeAreaView>
       <StatusBar />
       <ScrollView>
         <CompanyData />
-        {/* eslint-disable-next-line react-native/no-inline-styles */}
         <Text style={{fontSize: 30}}>Test is in control</Text>
         <Ex />
         <Text>{fruit()}</Text>
-        <Text style={style.text}>Test is in control</Text>
         <Button title="Click Me" onPress={() => EX2('hello')} />
+        <Text style={style.text}>{name}</Text>
+        <Button title="Click Me" onPress={stateHandler} />
+        <Parent />
+        <StylingComponent />
       </ScrollView>
     </SafeAreaView>
   );
