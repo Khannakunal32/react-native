@@ -17,6 +17,7 @@ import {
 import CompanyData from './components/CompanyData';
 import Parent from './components/PassingProps';
 import StylingComponent from './components/Styling';
+import InputBox from './components/InputBox';
 
 const style = StyleSheet.create({
   text: {
@@ -68,6 +69,7 @@ function App(): JSX.Element {
         <Button title="Click Me" onPress={stateHandler} />
         <Parent />
         <StylingComponent />
+        <InputBox />
       </ScrollView>
     </SafeAreaView>
   );
