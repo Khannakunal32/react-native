@@ -12,6 +12,7 @@ import NavigatorData from './components/NavigatorData';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './components/HomeScreen';
 import OldClassComponent from './components/OldClassComponent';
+import UseEffectEx from './components/UseEffectEx';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,6 +22,7 @@ function App(): JSX.Element {
       <Tab.Navigator>
         <Tab.Screen name="OldClass" component={OldClassComponent} />
         <Tab.Screen name="NavigatorData" component={NavigatorData} />
+        <Tab.Screen name="UseEffectEx" component={UseEffectEx} />
       </Tab.Navigator>
     </NavigationContainer>
   );
