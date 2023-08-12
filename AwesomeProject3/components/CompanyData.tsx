@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from 'react-native';
 
-function CompanyData(): JSX.Element {
+function CompanyData(props): JSX.Element {
   return <Text>Company Data</Text>;
 }
 
