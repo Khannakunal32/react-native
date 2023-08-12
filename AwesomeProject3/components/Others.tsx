@@ -56,7 +56,6 @@ function Others(props: any): JSX.Element {
     <SafeAreaView>
       <StatusBar />
       <ScrollView>
-        <CompanyData />
         <Text style={{fontSize: 30}}>Test is in control</Text>
         <Ex />
         <Text>{fruit()}</Text>
