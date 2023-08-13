@@ -13,7 +13,9 @@ import OldClassComponent from './components/OldClassComponent';
 import UseEffectEx from './components/UseEffectEx';
 import CallingApi from './components/CallingApi';
 import LocalApi from './components/LocalApi';
+import Async from './components/extra';
 import Extra from './components/extra';
+import AsyncStorageComponent from './components/AsyncStorage';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,6 +27,7 @@ function App(): JSX.Element {
   return (
     <NavigationContainer>
       <Tab.Navigator>
+        <Tab.Screen name="Async" component={AsyncStorageComponent} />
         <Tab.Screen name="Extra" component={Extra} />
         <Tab.Screen name="localApi" component={LocalApi} />
         <Tab.Screen name="CallApi" component={CallingApi} />
