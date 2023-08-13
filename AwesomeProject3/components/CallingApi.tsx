@@ -1,6 +1,7 @@
 import {
   ActivityIndicator,
   Button,
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -57,25 +58,20 @@ const CallingApi = () => {
   return (
     <View>
       <NonList data={data} getApi={getApi} />
-      <ScrollView>
-        {/* Use conditional rendering to show or hide the indicator */}
-        {dataList ? (
-          dataList
-            .filter(item => item.id <= 30)
-            .map(item => {
-              return (
-                <View style={styles.ViewList} key={item.id}>
-                  <TextStyled data={item} />
-                </View>
-              );
-            })
-        ) : (
-          // Show an ActivityIndicator while waiting for the data
-          <View style={styles.loading}>
-            <ActivityIndicator color={'#fff'} size={'large'} />
-          </View>
-        )}
-      </ScrollView>
+      {/* Use conditional rendering to show or hide the indicator */}
+      {dataList ? (
+        <FlatList
+          data={dataList.filter(item => item.id < 30)}
+          renderItem={({item}) => {
+            return <TextStyled data={item} />;
+          }}
+        />
+      ) : (
+        // Show an ActivityIndicator while waiting for the data
+        <View style={styles.loading}>
+          <ActivityIndicator color={'#fff'} size={'large'} />
+        </View>
+      )}
     </View>
   );
 };
@@ -93,7 +89,7 @@ const NonList = (props: any) => {
 function TextStyled(props: any) {
   const data = props.data;
   return (
-    <Text>
+    <Text style={styles.ViewList}>
       User ID: {data.userId}
       {'\n'}
       ID: {data.id}
