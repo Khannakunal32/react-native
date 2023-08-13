@@ -1,4 +1,11 @@
-import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 type dataType = {
@@ -10,7 +17,7 @@ type dataType = {
 
 const CallingApi = () => {
   const [data, setData] = useState<dataType>();
-  const [dataList, setDataList] = useState<dataType[]>([]);
+  const [dataList, setDataList] = useState<dataType[]>();
   const getApi = async () => {
     try {
       const response = await fetch(
@@ -18,7 +25,6 @@ const CallingApi = () => {
       );
       const json = await response.json();
       setData(json);
-      console.warn(json);
     } catch (error) {
       console.warn(error);
     }
@@ -27,18 +33,19 @@ const CallingApi = () => {
     fetch('https://jsonplaceholder.typicode.com/todos/1')
       .then(response => response.json())
       .then(json => {
-        console.warn(json);
         setData(json);
       })
       .catch(error => console.warn(error));
   };
   const getApiList = async () => {
     try {
-      const response = await fetch(
-        'https://jsonplaceholder.typicode.com/todos',
-      );
-      let result = await response.json();
-      setDataList(result);
+      setTimeout(async () => {
+        const response = await fetch(
+          'https://jsonplaceholder.typicode.com/todos',
+        );
+        let result = await response.json();
+        setDataList(result);
+      }, 5000);
     } catch (error) {
       console.error(error);
     }
@@ -51,23 +58,23 @@ const CallingApi = () => {
     <View>
       <NonList data={data} getApi={getApi} />
       <ScrollView>
-        {dataList
-          .filter(item => item.id <= 30)
-          .map(item => {
-            return (
-              <View style={styles.ViewList} key={item.id}>
-                <Text>
-                  User ID: {item.userId}
-                  {'\n'}
-                  ID: {item.id}
-                  {'\n'}
-                  Title: {item.title}
-                  {'\n'}
-                  Completed: {item.completed ? 'Yes' : 'No'}
-                </Text>
-              </View>
-            );
-          })}
+        {/* Use conditional rendering to show or hide the indicator */}
+        {dataList ? (
+          dataList
+            .filter(item => item.id <= 30)
+            .map(item => {
+              return (
+                <View style={styles.ViewList} key={item.id}>
+                  <TextStyled data={item} />
+                </View>
+              );
+            })
+        ) : (
+          // Show an ActivityIndicator while waiting for the data
+          <View style={styles.loading}>
+            <ActivityIndicator color={'#fff'} size={'large'} />
+          </View>
+        )}
       </ScrollView>
     </View>
   );
@@ -77,23 +84,26 @@ const NonList = (props: any) => {
   const data = props.data;
   return (
     <View>
+      {data ? <TextStyled data={data} /> : <Text>loading</Text>}
       <Button title="getApi" onPress={props.getApi} />
-      {data ? (
-        <Text>
-          User ID: {data.userId}
-          {'\n'}
-          ID: {data.id}
-          {'\n'}
-          Title: {data.title}
-          {'\n'}
-          Completed: {data.completed ? 'Yes' : 'No'}
-        </Text>
-      ) : (
-        <Text>loading</Text>
-      )}
     </View>
   );
 };
+
+function TextStyled(props: any) {
+  const data = props.data;
+  return (
+    <Text>
+      User ID: {data.userId}
+      {'\n'}
+      ID: {data.id}
+      {'\n'}
+      Title: {data.title}
+      {'\n'}
+      Completed: {data.completed ? 'Yes' : 'No'}
+    </Text>
+  );
+}
 
 export default CallingApi;
 
@@ -102,5 +112,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
     margin: 5,
+  },
+  // Add a style for the loading view
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
   },
 });
