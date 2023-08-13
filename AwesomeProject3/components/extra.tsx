@@ -1,5 +1,5 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
-import React, {useRef} from 'react';
+import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
 
 type dataType = {
   color?: string;
@@ -22,16 +22,38 @@ MyText.defaultProps = {
 };
 
 const Extra = () => {
-  const inputRef = useRef(null);
-  const focusInput = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
+  const inputRef = useRef<TextInput>(null);
+  const [inputValue, setInputValue] = useState('');
+  const prevInputValue = useRef('');
+
+  useEffect(() => {
+    prevInputValue.current = inputValue;
+    console.warn(prevInputValue.current);
+  }, [inputValue]);
+
+  const updateInput = () => {
+    inputRef.current?.focus();
+    inputRef.current?.setNativeProps({
+      style: {backgroundColor: 'red', color: 'white'},
+    });
+  };
+  const clearText = () => {
+    setInputValue('');
   };
   return (
     <View>
       <MyText color="blue">Hello bros</MyText>
-      <Button title="clickRef" onPress={focusInput} />
+      <TextInput ref={inputRef} placeholder="name" />
+      <TextInput
+        placeholder="Enter your name"
+        value={inputValue}
+        onChangeText={text => setInputValue(text)}
+      />
+
+      <Text>Current Value: {inputValue}</Text>
+      <Text>Previous Value: {prevInputValue.current}</Text>
+      <Button title="useRef" onPress={updateInput} />
+      <Button title="clear" onPress={clearText} />
     </View>
   );
 };
