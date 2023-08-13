@@ -8,7 +8,16 @@ const AsyncStorageComponent = () => {
 
   const storData = async () => {
     try {
-      await AsyncStorage.setItem('name', name);
+      const expiryTime = 1;
+      const now = new Date();
+
+      now.setMinutes(now.getMinutes() + expiryTime);
+      const expiryTimeinTimeStamp = Math.floor(now.getTime() / 1000);
+      const data = {
+        name: name,
+        expiryTime: expiryTimeinTimeStamp,
+      };
+      await AsyncStorage.setItem('name', JSON.stringify(data));
       console.warn('Data successfully saved');
     } catch (e) {
       console.warn('Failed to save the data to the storage' + e);
@@ -28,9 +37,17 @@ const AsyncStorageComponent = () => {
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem('name');
-      console.warn(jsonValue);
-      if (jsonValue != null) {
+      let jsonValue = await AsyncStorage.getItem('name');
+      const newNow = new Date();
+      const timeNowinTimeStamp = Math.floor(newNow.getTime() / 1000);
+
+      if (
+        jsonValue != null &&
+        timeNowinTimeStamp < JSON.parse(jsonValue)?.expiryTime
+      ) {
+        console.warn('data not expired');
+        setShowName(JSON.parse(jsonValue).name);
+
         setShowName(jsonValue);
       } else {
         setShowName('');
@@ -42,7 +59,7 @@ const AsyncStorageComponent = () => {
 
   useEffect(() => {
     getData();
-  });
+  }, []);
   return (
     <View>
       <Text>{name}</Text>
@@ -53,6 +70,7 @@ const AsyncStorageComponent = () => {
       />
       <Button title="Save Data" onPress={storData} />
       <Button title="remove" onPress={removeData} />
+      <Button title="check expiry" onPress={getData} />
       <Text>Async storage:{showName} </Text>
     </View>
   );
