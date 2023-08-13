@@ -13,6 +13,7 @@ import OldClassComponent from './components/OldClassComponent';
 import UseEffectEx from './components/UseEffectEx';
 import CallingApi from './components/CallingApi';
 import LocalApi from './components/LocalApi';
+import Extra from './components/extra';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,6 +25,7 @@ function App(): JSX.Element {
   return (
     <NavigationContainer>
       <Tab.Navigator>
+        <Tab.Screen name="Extra" component={Extra} />
         <Tab.Screen name="localApi" component={LocalApi} />
         <Tab.Screen name="CallApi" component={CallingApi} />
         <Tab.Screen name="OldClass" component={OldClassComponent} />
