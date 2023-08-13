@@ -5,21 +5,25 @@
  * @format
  */
 
-import React, {useState} from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NavigationContainer} from '@react-navigation/native';
-import NavigatorData from './components/NavigatorData';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from './components/HomeScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
+import NavigatorData from './components/NavigatorData';
 import OldClassComponent from './components/OldClassComponent';
 import UseEffectEx from './components/UseEffectEx';
+import CallingApi from './components/CallingApi';
 
 const Tab = createBottomTabNavigator();
 
 function App(): JSX.Element {
+  const x = 5;
+  const y = 6;
+  const z = x + y + 1;
+  console.warn(z);
   return (
     <NavigationContainer>
       <Tab.Navigator>
+        <Tab.Screen name="CallApi" component={CallingApi} />
         <Tab.Screen name="OldClass" component={OldClassComponent} />
         <Tab.Screen name="NavigatorData" component={NavigatorData} />
         <Tab.Screen name="UseEffectEx" component={UseEffectEx} />

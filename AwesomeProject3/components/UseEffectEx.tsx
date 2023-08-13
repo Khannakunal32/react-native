@@ -32,10 +32,13 @@ const UseEffectEx = () => {
 };
 
 function User(props: any): JSX.Element {
-  // on mount and count change
+  let timer = setInterval(() => {
+    console.warn('hi');
+  }, 2000);
+  // on unmount and count change
   useEffect(() => {
-    console.warn('User component mounted');
-  }, [props.info.count]);
+    return () => clearInterval(timer);
+  });
   const {count, count2} = props.info;
   return (
     <View>
