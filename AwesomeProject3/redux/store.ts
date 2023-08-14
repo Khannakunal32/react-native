@@ -3,9 +3,14 @@ import {rootReducer} from './rootReducer';
 // import {reducer} from './reducer';
 
 export const store = configureStore({
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
+  //   middleware: getDefaultMiddleware =>
+  //     getDefaultMiddleware({
+  //       immutableCheck: false,
+  //     }),
+  middleware: getDefaultMiddleware => [
+    ...getDefaultMiddleware({
       immutableCheck: false,
     }),
+  ],
   reducer: rootReducer,
 });

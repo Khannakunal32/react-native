@@ -1,7 +1,7 @@
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {addToCart} from '../../redux/actions';
+import {addToCart, removeFromCart} from '../../redux/actions';
 import {useSelector} from 'react-redux';
 
 const Product = (props: any) => {
@@ -26,6 +26,8 @@ const Product = (props: any) => {
   }
   function handleRemoveFromCart() {
     console.log(item);
+    dispatch(removeFromCart(item));
+    setIsAdded(false);
   }
   return (
     <View style={styles.pack} key={index}>

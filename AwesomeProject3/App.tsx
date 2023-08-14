@@ -8,15 +8,14 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import NavigatorData from './components/NavigatorData';
-import OldClassComponent from './components/OldClassComponent';
-import UseEffectEx from './components/UseEffectEx';
+import AsyncStorageComponent from './components/AsyncStorage';
 import CallingApi from './components/CallingApi';
 import LocalApi from './components/LocalApi';
-import Async from './components/extra';
-import Extra from './components/extra';
-import AsyncStorageComponent from './components/AsyncStorage';
+import NavigatorData from './components/NavigatorData';
+import OldClassComponent from './components/OldClassComponent';
 import MainScreen from './components/ShoppingRedux/MainScreen';
+import UseEffectEx from './components/UseEffectEx';
+import Extra from './components/extra';
 
 const Tab = createBottomTabNavigator();
 
