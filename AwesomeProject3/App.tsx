@@ -16,6 +16,7 @@ import LocalApi from './components/LocalApi';
 import Async from './components/extra';
 import Extra from './components/extra';
 import AsyncStorageComponent from './components/AsyncStorage';
+import MainScreen from './components/ShoppingRedux/MainScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,6 +28,11 @@ function App(): JSX.Element {
   return (
     <NavigationContainer>
       <Tab.Navigator>
+        <Tab.Screen
+          options={{headerShown: false}}
+          name="MainRedux"
+          component={MainScreen}
+        />
         <Tab.Screen name="Async" component={AsyncStorageComponent} />
         <Tab.Screen name="Extra" component={Extra} />
         <Tab.Screen name="localApi" component={LocalApi} />
