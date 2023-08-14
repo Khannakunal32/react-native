@@ -1,6 +1,9 @@
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const firstName = createContext(['', 0]);
+const age = createContext(3);
 
 const AsyncStorageComponent = () => {
   const [name, setName] = useState('John Doe');
@@ -56,6 +59,7 @@ const AsyncStorageComponent = () => {
       console.warn('Failed to load the data from storage' + error);
     }
   };
+  const agex = 102;
 
   useEffect(() => {
     getData();
@@ -72,8 +76,22 @@ const AsyncStorageComponent = () => {
       <Button title="remove" onPress={removeData} />
       <Button title="check expiry" onPress={getData} />
       <Text>Async storage:{showName} </Text>
+      <firstName.Provider value={[name, agex]}>
+        <Alevel />
+      </firstName.Provider>
     </View>
   );
+};
+
+const Alevel = () => {
+  return <Blevel />;
+};
+const Blevel = () => {
+  return <Clevel />;
+};
+const Clevel = () => {
+  const [name, agex] = useContext(firstName);
+  return <Text>{name}</Text>;
 };
 
 export default AsyncStorageComponent;
