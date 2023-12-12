@@ -1,0 +1,49 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "title": "asdfa",
+      "author": "asdfasdf",
+      "id": 2
+    },
+    {
+      "id": 8,
+      "title": "sss",
+      "author": "ssx"
+    },
+    {
+      "title": "hello",
+      "author": "how are you",
+      "id": 9
+    },
+    {
+      "id": 3,
+      "title": "hello",
+      "author": "how are you"
+    },
+    {
+      "id": 4,
+      "title": "hello",
+      "author": "how are youd"
+    },
+    {
+      "title": "asdf",
+      "author": "asdf",
+      "id": 10
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
